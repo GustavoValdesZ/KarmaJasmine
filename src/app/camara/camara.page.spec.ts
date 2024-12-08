@@ -1,14 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { CamaraPage } from './camara.page';
+import { CameraPage } from './camara.page';  // Importa 'CameraPage' en lugar de 'CamaraPage'
 
-describe('CamaraPage', () => {
-  let component: CamaraPage;
-  let fixture: ComponentFixture<CamaraPage>;
+describe('CameraPage', () => {  // Asegúrate de que también coincida el nombre en el 'describe'
+  let component: CameraPage;  // Aquí también usa 'CameraPage'
+  let fixture: ComponentFixture<CameraPage>;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CamaraPage);
+    TestBed.configureTestingModule({
+      declarations: [CameraPage],  // Asegúrate de declarar 'CameraPage' en el TestBed
+    }).compileComponents();  // Asegúrate de compilar los componentes antes de usarlos
+
+    fixture = TestBed.createComponent(CameraPage);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    fixture.detectChanges();  // Detecta cambios en la vista
   });
 
   it('should create', () => {
