@@ -9,18 +9,17 @@ import { Geolocation, PermissionStatus } from '@capacitor/geolocation';
 export class MapPage {
   constructor() {}
 
-  // Función para obtener la ubicación y mostrarla en el mapa
+  // Obtiene la ubicación y actualiza el iframe con la URL dinámica
   async getLocationAndShowOnMap() {
     try {
-      // Comprobamos el permiso de ubicación
+      // Solicitar permisos de ubicación
       const permission: PermissionStatus = await Geolocation.requestPermissions();
-
       if (permission.location !== 'granted') {
         console.error('Permiso de ubicación no otorgado');
         return;
       }
 
-      // Obtener la ubicación del dispositivo con alta precisión
+      // Obtener posición actual
       const position = await Geolocation.getCurrentPosition({
         enableHighAccuracy: true,
       });
@@ -28,11 +27,10 @@ export class MapPage {
       const latitude = position.coords.latitude;
       const longitude = position.coords.longitude;
 
-      // Obtener el iframe de mapa
+      // Actualizar iframe dinámicamente
       const mapFrame = document.getElementById('mapframe') as HTMLIFrameElement;
       if (mapFrame) {
-        // Asignar la URL del iframe con la ubicación actual
-        mapFrame.src = `https://www.google.com/maps?q=${latitude},${longitude}`;
+        mapFrame.src = `https://www.google.com/maps?q=${latitude},${longitude}&z=15&output=embed`;
       }
     } catch (error) {
       console.error('Error al obtener la ubicación o mostrar el mapa:', error);
